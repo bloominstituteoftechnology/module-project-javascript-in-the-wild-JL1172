@@ -29,8 +29,22 @@
     // ❗ Notes
     // 🧠 Try using destructuring to grab a reference to the first element of the array
     // 🧠 Try using the at method of arrays to grab the last element
-    const swapper = () => {
-return 'No swap performed'
+    const swapper = (array) => {
+     
+      if (array.length < 2) {
+        return 'No swap performed';
+      }
+      let [...copy] = array;
+      copy[0] = copy.at(-1);
+      copy[copy.length -1] = array[0];
+      return copy; 
+      
+
+      // let lastVal = array.pop(); //trying a different way
+      // let first = array.shift(); 
+      // array.push(first);
+      // array.unshift(lastVal);
+      // return array; 
     }
 
     // 👉 CHALLENGE 2
@@ -46,8 +60,17 @@ return 'No swap performed'
     // 🧠 Try using the ternary operator instead of a conditional statement when deciding what to return.
     // 🧠 So instead of doing `if ('foo') return 'bar' else return 'baz'` do `return 'foo' ? 'bar' : 'baz'`
     // 🧠 The above recommendations allow to write the whole function body in just two clean lines!
-    const headAndTail = () => {
-
+    const headAndTail = (array) => {
+      
+      if (array.length === 0) {
+        return 'This array is empty';
+      }
+      let [head,...tail] =  array; 
+      let newArray = [];
+      newArray.unshift(head);
+          
+      newArray.push(tail); 
+      return newArray;
     }
 
     // 👉 CHALLENGE 3
@@ -59,8 +82,11 @@ return 'No swap performed'
     // devGreet(false, false) // should return "Hey, I am a backend dev and I am sad"
     // ❗ Notes
     // 🧠 Use ternary expressions to construct the string.
-    const devGreet = () => {
-
+    const devGreet = (isFrontend,isHappy) => {
+      let expression;
+      return expression = isFrontend&&isHappy ? "Hey, I am a frontend dev and I am happy":
+      isFrontend&&!isHappy ? "Hey, I am a frontend dev and I am sad":
+      !isFrontend&&isHappy ? "Hey, I am a backend dev and I am happy": !isFrontend&&!isHappy ? "Hey, I am a backend dev and I am sad": '';
     }
 
     // 👉 CHALLENGE 4
@@ -72,7 +98,15 @@ return 'No swap performed'
     // recognize({}) // should return "Hidden Person Rocks!"
     // ❗ Notes
     // 🧠 Try using destructuring to grab the name, and a return followed by a ternary expression.
-    const recognize = () => {
+    const recognize = (user) => {
+      // if (user.name) {
+      //   return `${user.name} Rules!`
+      // } else {
+      //   return "Hidden Person Rocks!";
+      // } orrrrr
+        let outcome;
+        let {name} = user;
+        return outcome = name ? `${name} Rules!` : "Hidden Person Rocks!";
 
     }
 
@@ -83,10 +117,9 @@ return 'No swap performed'
     // processBooleans([1, 0, 0, 1, 0]) // should return ["Y", "N", "N", "Y", "N"]
     // ❗ Notes
     // 🧠 Using map, arrow function syntax, and the ternary, you can make this function a short one-liner
-    const processBooleans = () => {
-
+    const processBooleans = (array) => {
+      return array.map(ray => ray === 1 ? ray = "Y" : ray = "N")
     }
-
     // 👉 CHALLENGE 6
     // 🧠 The function reverseString takes a string as its argument, and returns it reversed.
     // 🧠 If the string is a palindrome though, return the string "It's a palindrome!"
@@ -97,8 +130,15 @@ return 'No swap performed'
     // 🧠 Split the string but do not use the reverse method of arrays. Let's do it manually.
     // 🧠 We suggest using a for loop. Research how to loop backwards over an array, starting at the last element.
     // 🧠 Use a ternary in the return statement.
-    const reverseString = () => {
-
+    const reverseString = (string) => {
+      let newString = string.split("");
+      let reversed = '';
+      for (let i = newString.length -1; i >= 0; i--) {
+        reversed += newString[i];
+      }
+     
+      let expression = reversed === string ? "It's a palindrome!" : reversed; 
+      return expression; 
     }
 
     // 👉 CHALLENGE 7
@@ -113,9 +153,54 @@ return 'No swap performed'
     // ❗ Notes
     // 🧠 Even though object properties have no particular order, to avoid confusing
     // the test runner, please set in each object first name, then age, and finally jsLover.
-    const zip = () => {
+    const zip = (first,second,third) => {
+      // let [first1,second1,third1] = first;
+      // let [first2,second2,third2] = second;
+      // let [first3,second3,third3] = third; 
 
-    }
+      class Obj {
+        constructor(name,born,jsLover) {
+          this.name = name
+          this.born = born
+          this.jsLover = jsLover
+        }
+      }
+
+      let firstObj;
+      let secondOj;
+      let thirdObj; 
+      
+      let newArray = [];
+
+      if (third.length === 0) {
+         let [first1,second1] = first;
+         let [first2,second2] = second;
+
+         firstObj = new Obj(first1,first2);
+         secondObj = new Obj(second1,second2);
+
+         newArray.unshift(firstObj);
+         newArray.push(secondObj);
+        
+        
+      } else if (third.length > 0) {
+        let [first1,second1,third1] = first;
+        let [first2,second2,third2] = second;
+        let [first3,second3,third3] = third; 
+
+         firstObj = new Obj(first1,first2,first3);
+         secondObj = new Obj(second1,second2,second3);
+         thirdObj = new Obj(third1,third2,third3);
+
+         newArray.unshift(secondObj);
+        newArray.unshift(firstObj);
+        newArray.push(thirdObj); 
+
+      };
+
+      
+  return newArray; 
+}
 
     // 🧪 TESTS, do not work below this line
     // 🧪 TESTS, do not work below this line
